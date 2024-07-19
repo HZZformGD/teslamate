@@ -200,6 +200,29 @@ export const SimpleMap = {
   },
 };
 
+export const AMap = {
+  mounted() {
+    const element = this.el;
+    const lng = parseFloat(element.dataset.lng);
+    const lat = parseFloat(element.dataset.lat);
+    const convertedCoords = wgs84ToGcj02(lng, lat);
+
+    // Initialize AMap
+    const map = new AMap.Map(element.id, {
+      center: [convertedCoords.lng, convertedCoords.lat],
+      zoom: parseInt(element.dataset.zoom) || 15,
+    });
+
+    // Add Marker
+    const marker = new AMap.Marker({
+      position: [convertedCoords.lng, convertedCoords.lat],
+      icon: element.dataset.icon || '',  // Customize the icon if needed
+    });
+
+    marker.setMap(map);
+  }
+};
+
 export const TriggerChange = {
   updated() {
     this.el.dispatchEvent(new CustomEvent("change"));
