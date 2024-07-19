@@ -19,6 +19,9 @@ defmodule TeslaMateWeb.CarLive.Summary do
       :ok = Vehicles.subscribe_to_fetch(car.id)
     end
 
+    # 获取高德地图的 API Key
+    amap_api_key = Application.get_env(:teslamate, TeslaMateWeb.Live.CarLive)[:amap_api_key]
+
     assigns = %{
       car: car,
       summary: summary,
@@ -30,7 +33,8 @@ defmodule TeslaMateWeb.CarLive.Summary do
       duration: humanize_duration(summary.since),
       error: nil,
       error_timeout: nil,
-      loading: false
+      loading: false,
+      amap_api_key: amap_api_key  # 添加 API Key 到 assigns 中
     }
 
     {:ok, assign(socket, assigns)}
