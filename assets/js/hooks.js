@@ -9,6 +9,16 @@ function toLocalTime(dateStr, opts) {
     ? date.toLocaleTimeString(LANG, opts)
     : "–";
 }
+// 坐标转换函数（WGS84 到 GCJ02）
+function wgs84ToGcj02(lng, lat) {
+    const x = lng - 105.0;
+    const y = lat - 35.0;
+    const z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * Math.PI / 180.0);
+    const theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * Math.PI / 180.0);
+    const gcjLng = z * Math.cos(theta) + 105.0;
+    const gcjLat = z * Math.sin(theta) + 35.0;
+    return { lng: gcjLng, lat: gcjLat };
+}
 
 function toLocalDate(dateStr, opts) {
   const date = new Date(dateStr);
