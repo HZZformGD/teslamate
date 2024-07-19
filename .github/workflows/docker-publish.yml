@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - v1.30.2.amap
-
+env:
+  REPOSITORY: hzzformgd
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -29,4 +30,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/teslamate:latest
+          tags: ghcr.io/${{ env.REPOSITORY }}/teslamate:latest
