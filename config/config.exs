@@ -16,6 +16,10 @@ config :teslamate,
     TeslaMate.Auth.Tokens
   ]
 
+config :teslamate, TeslamateWeb.Live.CarLive,
+  amap_api_key: System.get_env("AMAP_API_KEY")
+
+
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:car_id]
