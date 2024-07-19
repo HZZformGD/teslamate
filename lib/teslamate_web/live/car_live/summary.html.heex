@@ -1,4 +1,6 @@
 <div class="car card">
+  <script src={"https://webapi.amap.com/maps?v=2.0&key=#{@amap_api_key}"}></script>
+
   <div class="card-image">
     <figure
         id={"map_#{@car.id}_container"}
@@ -23,7 +25,6 @@
       disabled
     />
   </div>
-  <script src="<%= raw("https://webapi.amap.com/maps?v=2.0&key=#{@amap_api_key}") %>"></script>
 
   <div class="card-content">
     <div class="media is-flex mb-5">
